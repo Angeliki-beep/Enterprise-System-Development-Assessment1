@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h2 th:text="'Player: ' + ${currentGame.playerName}"></h2>
+    <p th:text="${feedback} ?: 'Take a guess between 1 and 100!'"></p>
+    <p>Attempts: <span th:text="${currentGame.attempts}"></span></p>
+
+    <div th:if="!${currentGame.isFinished}">
+        <form action="/guess" method="post">
+            <input type="number" name="val" required>
+            <button type="submit">Guess</button>
+        </form>
+    </div>
+
+    <div th:if="${currentGame.isFinished}">
+        <h3>Correct! Result saved to database.</h3>
+        <a href="/">Play Again</a>
+    </div>
+</body>
+</html>
